@@ -155,6 +155,7 @@ def _calculate_quarter_final_results(eight_final_results):
     results = []
 
     for team_a_name, team_b_name in games:
+
         team_a = eight_final_results[team_a_name]
         team_b = eight_final_results[team_b_name]
         winner = _winner_of(
@@ -205,12 +206,19 @@ def _compare_winner_teams(*teams):
             team['stats'] = {'wins': 0,
                              'losses': 0}
 
+    # bwin quote
+    quote = cmp(*map(itemgetter('Quote'), teams))
+    # script does not seem too happy about cmp value of 0, seems not to
+    # happen for the other cmp functions, so we just fall back to market value
+    if quote != 0:
+        return quote
+
     # Marktwert
-    # return cmp(*tuple(sum(map(itemgetter('Marktwert'), team['players']))
-    #                   for team in reversed(teams)))
+    return cmp(*tuple(sum(map(itemgetter('Marktwert'), team['players']))
+                      for team in reversed(teams)))
 
     # FIFA Rang
-    return cmp(*map(itemgetter('FIFA Rang'), teams))
+    # return cmp(*map(itemgetter('FIFA Rang'), teams))
 
 
 def _winner_of(team_a, team_b, looser_score_multiplier):

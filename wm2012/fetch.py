@@ -5,7 +5,7 @@ import json
 
 
 def recursive_encode(item):
-    if isinstance(item, (int, str)):
+    if isinstance(item, (int, float, str)):
         return item
 
     if isinstance(item, unicode):
