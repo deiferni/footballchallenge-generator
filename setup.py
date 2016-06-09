@@ -9,6 +9,7 @@ setup(name='wm2012',
         'zope.interface',
         'lxml<=2.3.6',
         'path.py',
+        'pudb',
         ],
 
       entry_points = {
